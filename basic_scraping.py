@@ -14,4 +14,13 @@ and they lived at the bottom of a well.</p>
 <p class="story">...</p>
 """
 # sets the html parsed through soup
-soup = BeautifulSoup(html_doc, "")
+soup = BeautifulSoup(html_doc, "html.parser")
+
+# print(soup.prettify())
+
+# print(soup.title, '\n', soup.title.string )
+
+# print(soup.p.b)
+
+
+
