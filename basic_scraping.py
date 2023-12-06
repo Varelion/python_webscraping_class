@@ -22,5 +22,12 @@ soup = BeautifulSoup(html_doc, "html.parser")
 
 # print(soup.p.b)
 
+# print(soup.find(href="http://example.com/lacie"))
+# print(soup.find(class_="story"))
+
+all_a_tags = soup.find_all('a')
+print(all_a_tags[2])
+print(all_a_tags[2].string)
+
 
 
