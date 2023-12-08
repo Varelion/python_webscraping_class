@@ -93,6 +93,8 @@ for tag in filtered:
 
 ################################################################################################
 
+# Link Scraping  ################################################################
+
 p_content = soup.find_all('p')
 body_links = []
 for p in p_content:
@@ -107,3 +109,4 @@ for a in body_links:
     links[a['title']] =  'https://wikipedia.org/' + a['href']
 
 print(links)
+# SECOND SOLUTION FOR TAXONOM ################################################################
