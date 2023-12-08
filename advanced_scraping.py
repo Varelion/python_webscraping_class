@@ -29,11 +29,15 @@ except Exception as e:
     print("Error!:", e)
 
 
-print("End")
 
 # this saves the file on the path read as utf-8 as f
 # then it saves html variable as the contents being read from object f
 
 
+# Here we are passing the saved html page to BeautifulSoup with the 'html.parser' parameter.
+soup = BeautifulSoup(saved_html, 'html.parser')
 
-###
+section_headings = soup.find_all('span', attrs={'class': 'mw-headline'})
+
+for heading in section_headings:
+    print(heading.text)
