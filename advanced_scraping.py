@@ -95,23 +95,53 @@ for tag in filtered:
 
 # Link Scraping  ################################################################
 
-p_content = soup.find_all('p')
-body_links = []
-for p in p_content:
-    body_links += p.find_all('a')
+# p_content = soup.find_all('p')
+# body_links = []
+# for p in p_content:
+#     body_links += p.find_all('a')
 
-body_links = list(filter(lambda a: '#cite' not in a['href'], body_links))
-# print(body_links)
+# body_links = list(filter(lambda a: '#cite' not in a['href'], body_links))
+# # print(body_links)
 
-links = {}
+# links = {}
 
-for a in body_links:
-    links[a['title']] =  'https://wikipedia.org/' + a['href']
+# for a in body_links:
+#     links[a['title']] =  'https://wikipedia.org/' + a['href']
 
-print(links)
+# print(links)
+
 ##############################################################################################
 
 # IMG Scraping ###############################################################################
 
+# Extracting Images from the BeautifulSoup-parsed HTML Document
+imgs = soup.find_all('img')
+
+# Iterate through each image tag
+for i in imgs:
+    # Check if the 'class' attribute is present in the image tag's attributes
+    if 'class' in i.attrs:
+        # Print the value of the 'class' attribute if present
+        print(i['class'])
+    else:
+        # Print the entire image tag if 'class' attribute is not present
+        print(i)
+
+# Filter and Remove Images Without a 'class' Attribute
+# Create a list of images that have the 'class' attribute
+imgs = list(filter(lambda img: 'class' in img.attrs, imgs))
+print(imgs)
+
+# Filter Images Based on a Specific Class ('mw-file-element')
+# Create a list of images that have the class attribute set to 'mw-file-element'
+imgs = list(filter(lambda img: img['class'][0] == 'mw-file-element', imgs))
 
 ##############################################################################################
+
+
+def download_image(url, path):
+    response = requests.get(url)
+                # NOTICE 'wb' is 'writing bytes' THIS IS HOW YOU WRITE IMAGES
+    with open(path, 'wb') as f:
+        f.write(response.content)
+
