@@ -74,18 +74,36 @@ for tag in filtered:
 
 # print(taxonomy)
 
-def taxonomy_filter_2(tag):
-    # Here we are going to be parsing for any single table row that has two children. HOWEVER, the reason that we aren't going to be finding it with tag.children ==2, is because, in the soup, there are artifacts between the two tables, and it turns out that, this causes the correct number that we are looking for to be tag.children == 4
-    return 'tr' and len(list(tag.children)) == 4
+# SECOND SOLUTION FOR TAXONOM ################################################################
 
-keys_2 = info_box.find_all(taxonomy_filter_2)
+# def taxonomy_filter_2(tag):
+#     # Here we are going to be parsing for any single table row that has two children. HOWEVER, the reason that we aren't going to be finding it with tag.children ==2, is because, in the soup, there are artifacts between the two tables, and it turns out that, this causes the correct number that we are looking for to be tag.children == 4
+#     return 'tr' and len(list(tag.children)) == 4
 
-taxonomy_2 = {}
-# print('second method:', info_box.find_all(taxonomy_filter_2))
-for tr in keys_2:
-    target = tr.find_all('td')
-    if len(target) > 0:
-        taxonomy_2[(target[0].text.strip())] = target[1].text.strip()
+# keys_2 = info_box.find_all(taxonomy_filter_2)
 
-print(taxonomy_2)
+# taxonomy_2 = {}
+# # print('second method:', info_box.find_all(taxonomy_filter_2))
+# for tr in keys_2:
+#     target = tr.find_all('td')
+#     if len(target) > 0:
+#         taxonomy_2[(target[0].text.strip())] = target[1].text.strip()
 
+# print(taxonomy_2)
+
+################################################################################################
+
+p_content = soup.find_all('p')
+body_links = []
+for p in p_content:
+    body_links += p.find_all('a')
+
+body_links = list(filter(lambda a: '#cite' not in a['href'], body_links))
+# print(body_links)
+
+links = {}
+
+for a in body_links:
+    links[a['title']] =  'https://wikipedia.org/' + a['href']
+
+print(links)
