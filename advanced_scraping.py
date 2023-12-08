@@ -39,5 +39,16 @@ soup = BeautifulSoup(saved_html, 'html.parser')
 
 section_headings = soup.find_all('span', attrs={'class': 'mw-headline'})
 
-for heading in section_headings:
-    print(heading.text)
+# for heading in section_headings:
+#     print(heading.text)
+
+# Here we are overwriting 'section_headings' with the 'span.string' value of every 'span' in 'section_headings'
+section_headings = [span.string for span in section_headings]
+print(section_headings)
+
+# Take note that the type of one of those strings is 'bs4.element.NavigableString'.
+# This means that each of the strings in section_heading remembers its place in the original document.
+# In other words, we can print its parent.
+print(type(section_headings[2]))
+print(section_headings[2].parent)
+# If we had done '.text' instead of '.string' we would have severed this connection.
