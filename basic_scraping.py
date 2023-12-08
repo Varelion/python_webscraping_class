@@ -56,15 +56,18 @@ import requests
 response = requests.get("https://en.wikipedia.org/wiki/Bristlecone_pine")
 soup = BeautifulSoup(response.text, "html.parser")
 # Challenge #1 : Find the text within the top-level H1.
-# print(soup.find("h1").string)
-# print(soup.h1.text)
+print(soup.find("h1").string)
+print(soup.h1.text)
+
 # Challenge #2: Find how many H2 total there are on the page.
-# print(list(soup.find_all("h2")))
-# count = 0
-# for tag in list(soup.find_all('h2')):
-# 	count += 1
-# 	print(count)
-# print(len(soup.find_all("h2")))
+print(list(soup.find_all("h2")))
+count = 0
+for tag in list(soup.find_all('h2')):
+	count += 1
+	print(count)
+print(len(soup.find_all("h2")))
+
 # Challenge #3: Extract href metadata from the first href tag on the page.
-# elements_with_href = soup.select("[href]")
-# print(elements_with_href[0])
+elements_with_href = soup.select("[href]")
+print(elements_with_href[0])
+
